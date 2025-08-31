@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registeration Form</title>
+</head>
+<style>
+
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    form {
+      max-width: 350px;
+      margin: auto;
+      padding: 40px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      
+    }
+
+    input:focus{
+        outline: none;
+        border: 1.5px solid rgb(28, 162, 186);
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+    }
+
+    button {
+      background: blue;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    button:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+
+</style>
+<body>
+
+    <h1>Registeration Form</h1>
+
+    <form id="regform">
+
+        <label>Name :</label>
+        <input type="text" id="name" placeholder="Enter your Name">
+        <div id="nameerror" class="error"></div>
+
+        <label>Email :</label>
+        <input type="text" id="email" placeholder="Enter your Email">
+        <div id="emailerror" class="error"></div>
+
+        <label>Password :</label>
+        <input type="password" id="password" placeholder="Enter your Password">
+        <div id="passworderror" class="error"></div>
+
+        <button type="submit" id="submitbtn" disabled>Submit</button>
+
+    </form>
+
+    <script>
+        const nameInput = document.getElementById("name")
+        const emailInput = document.getElementById("email")
+        const passwordInput = document.getElementById("password")
+        const submitbtn = document.getElementById("submitbtn")
+
+        const nameerror = document.getElementById("nameerror")
+        const emailerror = document.getElementById("emailerror")
+        const passworderror = document.getElementById("passworderror")
+
+        function FormValidation(){
+
+            let valid = true
+
+            // Nmae validation
+
+            const namePattern = /^[a-zA-Z]+$/
+            if(namePattern.test(nameInput.value)==false){
+                nameerror.textContent="Name cannot be empty"
+            }
+            else{
+                nameerror.textContent=""
+            }
+
+            // email validation
+
+            const emailPattern=/^[a-z0-9]+@gmail\.com/
+            if(emailPattern.test(emailInput.value)==false){
+                emailerror.textContent="Enter a valid email address"
+            }
+
+            else{
+                emailerror.textContent=""
+            }
+
+            // password Validation
+
+            if(passwordInput.value.length<6){
+                passworderror.textContent="Password must be at least 6 characters"
+                valid = false
+            }
+            else{
+                passworderror.textContent=""
+                valid = true
+            }
+
+            //Enable submit button
+
+            submitbtn.disabled=!valid
+     
+        }
+
+        nameInput.addEventListener("input",FormValidation)
+        emailInput.addEventListener("input",FormValidation)
+        passwordInput.addEventListener("input",FormValidation)
+
+        document.getElementById("regform").addEventListener("submit",(e)=>{
+            e.preventDefault()
+            
+            alert("Form submitted successfully!");
+        })
+    </script>
+    
+</body>
+</html>
