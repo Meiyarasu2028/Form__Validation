@@ -1,83 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registeration Form</title>
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <style>
-
     body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: linear-gradient(90deg, #3e2f5b, #e94560);
+
+    }
+
+    .user {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-top: 0;
+        margin-bottom: 10px;
+        margin-left: 33%;
+
+
     }
 
     form {
-      max-width: 350px;
-      margin: auto;
-      padding: 40px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        max-width: 350px;
+        margin: auto;
+        padding: 40px;
+        border: 1.5px solid #ccc;
+        border-radius: 20px;
+        box-shadow: rgba(246, 246, 247, 0.2) 0px 8px 24px;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn__container {
+        color: white;
+    }
+
+    label {
+        color: white;
+        margin-top: 10px;
     }
 
     input {
-      width: 100%;
-      padding: 8px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: transparent;
+
     }
 
-    input:focus{
+    input:focus {
         outline: none;
-        border: 1.5px solid rgb(28, 162, 186);
+        border: 1.5px solid #3e2f5b;
+        background-color: transparent;
+    }
+
+    input::placeholder {
+        color: white;
     }
 
     .error {
-      color: red;
-      font-size: 13px;
+        color: red;
+        font-size: 13px;
     }
 
     button {
-      background: blue;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 20px;
+        background: #665589;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 20px;
     }
 
     button:disabled {
-      background: gray;
-      cursor: not-allowed;
+        background: gray;
+        cursor: not-allowed;
     }
 
+    .hidden {
+        display: none;
+    }
+
+    .reg__btn {
+        background-color: black;
+        color: white;
+        width: fit-content;
+    }
+
+    .lable {
+        margin-top: 10px;
+    }
 </style>
+
 <body>
 
-    <h1>Registeration Form</h1>
+    <div class="btn__container">
+        <p>Click to Register Your Form</p>
+        <button class="reg__btn">Register</button>
+    </div>
 
-    <form id="regform">
+    <div class="container hidden">
 
-        <label>Name :</label>
-        <input type="text" id="name" placeholder="Enter your Name">
-        <div id="nameerror" class="error"></div>
+        <h1 style="color: white;">Registration Form</h1>
 
-        <label>Email :</label>
-        <input type="text" id="email" placeholder="Enter your Email">
-        <div id="emailerror" class="error"></div>
+        <form id="regform">
 
-        <label>Password :</label>
-        <input type="password" id="password" placeholder="Enter your Password">
-        <div id="passworderror" class="error"></div>
+            <img src="./image/image-removebg-preview.png" class="user" alt="user">
 
-        <button type="submit" id="submitbtn" disabled>Submit</button>
+            <div class="lable">
+                <label>Name :</label>
+                <input type="text" id="name" placeholder="Enter your Name">
+                <div id="nameerror" class="error"></div>
 
-    </form>
+                <label>Email :</label>
+                <input type="text" id="email" placeholder="Enter your Email">
+                <div id="emailerror" class="error"></div>
+
+                <label>Password :</label>
+                <input type="password" id="password" placeholder="Enter your Password">
+                <div id="passworderror" class="error"></div>
+            </div>
+
+
+
+            <button type="submit" id="submitbtn" disabled>Submit</button>
+
+        </form>
+    </div>
+
+
+
+
+
+    <!-- Script -->
 
     <script>
         const nameInput = document.getElementById("name")
@@ -89,58 +157,70 @@
         const emailerror = document.getElementById("emailerror")
         const passworderror = document.getElementById("passworderror")
 
-        function FormValidation(){
+        const regbtn = document.querySelector(".reg__btn")
+        const container = document.querySelector(".container")
+        const btncontainer = document.querySelector(".btn__container")
+
+        function FormValidation() {
 
             let valid = true
 
             // Nmae validation
 
             const namePattern = /^[a-zA-Z]+$/
-            if(namePattern.test(nameInput.value)==false){
-                nameerror.textContent="Name cannot be empty"
+            if (namePattern.test(nameInput.value) == false) {
+                nameerror.textContent = "Name cannot be empty"
             }
-            else{
-                nameerror.textContent=""
+            else {
+                nameerror.textContent = ""
             }
 
             // email validation
 
-            const emailPattern=/^[a-z0-9]+@gmail\.com/
-            if(emailPattern.test(emailInput.value)==false){
-                emailerror.textContent="Enter a valid email address"
+            const emailPattern = /^[a-z0-9]+@gmail\.com/
+            if (emailPattern.test(emailInput.value) == false) {
+                emailerror.textContent = "Enter a valid email address"
             }
 
-            else{
-                emailerror.textContent=""
+            else {
+                emailerror.textContent = ""
             }
 
             // password Validation
 
-            if(passwordInput.value.length<6){
-                passworderror.textContent="Password must be at least 6 characters"
+            if (passwordInput.value.length < 6) {
+                passworderror.textContent = "Password must be at least 6 characters"
                 valid = false
             }
-            else{
-                passworderror.textContent=""
-                valid = true
+            else {
+                passworderror.textContent = ""
+
             }
 
             //Enable submit button
 
-            submitbtn.disabled=!valid
-     
+            submitbtn.disabled = !valid
+
         }
 
-        nameInput.addEventListener("input",FormValidation)
-        emailInput.addEventListener("input",FormValidation)
-        passwordInput.addEventListener("input",FormValidation)
+        nameInput.addEventListener("input", FormValidation)
+        emailInput.addEventListener("input", FormValidation)
+        passwordInput.addEventListener("input", FormValidation)
 
-        document.getElementById("regform").addEventListener("submit",(e)=>{
+        document.getElementById("regform").addEventListener("submit", (e) => {
             e.preventDefault()
-            
+
             alert("Form submitted successfully!");
         })
+
+        regbtn.addEventListener("click", function () {
+
+            container.classList.remove("hidden")
+            btncontainer.classList.add("hidden")
+
+        })
     </script>
-    
+
 </body>
+
 </html>
